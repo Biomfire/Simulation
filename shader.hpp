@@ -1,8 +1,3 @@
-//
-// Created by biomfire on 10/9/19.
-//
-
-
 #ifndef SHADER_HPP
 #define SHADER_HPP
 

@@ -9,7 +9,7 @@ set(OpenGlLinkers -lglut -lGLU -lGL -lglfw -lGLEW) # setting all the Glut librar
 
 ################################################
 
-add_executable(Simulation main.cpp shader.cpp shader.hpp) #common to all clion project
+add_executable(Simulation main.cpp shader.cpp shader.hpp Object/Object.cpp Object/Object.h Object/LoadObject/ObjFileParser.cpp Object/LoadObject/ObjFileParser.h Controls.cpp Controls.h) #common to all clion project
 target_link_libraries(Simulation ${OpenGlLinkers}) # linking opengl libraries to the project
 
 #################################################

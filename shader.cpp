@@ -1,7 +1,3 @@
-//
-// Created by biomfire on 10/9/19.
-//
-
 #include "shader.hpp"
 #include <cstdio>
 #include <string>
