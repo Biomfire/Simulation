@@ -9,8 +9,10 @@
 #include "Object/Object.h"
 #include "Object/LoadObject/ObjFileParser.h"
 #include "Controls.h"
-GLFWwindow* window;
-void init(){
+
+GLFWwindow *window;
+
+void init() {
     if (!glfwInit())
         throw ("Failed to initialize GLFW\n");
     glfwWindowHint(GLFW_SAMPLES, 4);
@@ -26,32 +28,31 @@ void init(){
     if (glewInit() != GLEW_OK)
         throw "Failed to initialize GLEW\n";
     glfwPollEvents();
-    glfwSetCursorPos(window, 1024/2, 768/2);
+    glfwSetCursorPos(window, 1024 / 2, 768 / 2);
 }
-
-
 
 
 int main() {
     try {
         init();
     }
-    catch(const char * e){
-        std::cerr<<e;
+    catch (const char *e) {
+        std::cerr << e;
     }
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glEnable(GL_CULL_FACE);
-    GLuint programID = LoadShaders( "/home/biomfire/Programing/Simulation/SimpleVertexShader.vertexshader", "/home/biomfire/Programing/Simulation/SimpleFragmentShader.fragmentshader" );
+    GLuint programID = LoadShaders("/home/biomfire/Programing/Simulation/SimpleVertexShader.vertexshader",
+                                   "/home/biomfire/Programing/Simulation/SimpleFragmentShader.fragmentshader");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // NOLINT(hicpp-signed-bitwise)
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-    Object obj ("/home/biomfire/Programing/Simulation/object.obj");
+    Object obj("/home/biomfire/Programing/Simulation/object.obj");
 // Enable depth test
     glEnable(GL_DEPTH_TEST);
 // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
 
-    do{
+    do {
         computeMatricesFromInputs();
         glm::mat4 ProjectionMatrix = getProjectionMatrix();
         glm::mat4 ViewMatrix = getViewMatrix();
@@ -64,6 +65,6 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     } // Check if the ESC key was pressed or the window was closed
-    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-           glfwWindowShouldClose(window) == 0 );
+    while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+           glfwWindowShouldClose(window) == 0);
 }
