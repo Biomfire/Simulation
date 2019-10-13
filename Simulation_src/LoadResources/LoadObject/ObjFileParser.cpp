@@ -5,17 +5,16 @@
 
 #include "ObjFileParser.h"
 
-ObjFileParser::ObjFileParser(std::string &path) {
-    ParseObjFile(path);
+ObjFileParser::ObjFileParser(std::istream &file) {
+    ParseObjFile(file);
 }
 
-void ObjFileParser::ParseObjFile(std::string &path) {
-    std::ifstream file = openFile(path);
-    parseVericies(file);
-    organizeVerticies();
+void ObjFileParser::ParseObjFile(std::istream &file) {
+    parseVertices(file);
+    organizeVertices();
 }
 
-void ObjFileParser::parseVericies(std::ifstream &file) {
+void ObjFileParser::parseVertices(std::istream &file) {
     std::string line;
     while (std::getline(file, line)) {
         std::string lineHeader;
@@ -36,20 +35,16 @@ void ObjFileParser::parseVericies(std::ifstream &file) {
     }
 }
 
-void ObjFileParser::organizeVerticies() {
+void ObjFileParser::organizeVertices() {
     for (unsigned long int currentVertexIndex : vertexIndices) {
         unsigned int vertexIndex = currentVertexIndex;
         glm::vec3 vertex = temp_vertices[vertexIndex - 1];
+        glm::vec2 uv = temp_uvs[vertexIndex -1];
+        glm::vec3 normal = temp_normals[vertexIndex-1];
         vertices.push_back(vertex);
+        uvs.push_back(uv);
+        normals.push_back(normal);
     }
-}
-
-std::ifstream ObjFileParser::openFile(const std::string &path) const {
-    std::ifstream file(path, std::ifstream::in);
-    if (!file.is_open()) {
-        throw "Can't open file";
-    }
-    return file;
 }
 
 void ObjFileParser::parseFaces(std::stringstream &line) {
@@ -84,7 +79,7 @@ const std::vector<glm::vec3> &ObjFileParser::getVertices() const {
 }
 
 const std::vector<glm::vec2> &ObjFileParser::getUv() const {
-    return uv;
+    return uvs;
 }
 
 const std::vector<glm::vec3> &ObjFileParser::getNormals() const {

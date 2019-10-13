@@ -13,14 +13,14 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <sstream>
-
+#include <istream>
 class ObjFileParser {
     std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec3> temp_normals;
     std::vector<glm::vec2> temp_uvs;
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uv;
+    std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals;
 
     void parseVertex(std::stringstream &line);
@@ -31,18 +31,16 @@ class ObjFileParser {
 
     void parseFaces(std::stringstream &file);
 
-    std::ifstream openFile(const std::string &path) const;
-
     std::vector<std::string> split(std::string &inputstring, char c);
 
-    void organizeVerticies();
+    void organizeVertices();
 
-    void parseVericies(std::ifstream &file);
+    void parseVertices(std::istream &file);
 
 public:
-    explicit ObjFileParser(std::string &path);
+    explicit ObjFileParser(std::istream &file);
 
-    void ParseObjFile(std::string &path);
+    void ParseObjFile(std::istream &file);
 
     const std::vector<glm::vec3> &getVertices() const;
 

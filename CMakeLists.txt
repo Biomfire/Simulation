@@ -1,15 +1,15 @@
 
-cmake_minimum_required(VERSION 3.15) # common to every CLion project
+cmake_minimum_required(VERSION 3.15)
 set(CMAKE_CXX_STANDARD 14)
-project(Simulation) # project name
+project(Simulation)
 
 
-set(OpenGlLinkers -lglut -lGLU -lGL -lglfw -lGLEW) # setting all the Glut libraries as one variable.
+set(OpenGlLinkers -lglut -lGLU -lGL -lglfw -lGLEW)
 
 
 ################################################
-
-add_executable(Simulation main.cpp shader.cpp shader.hpp Object/Object.cpp Object/Object.h Object/LoadObject/ObjFileParser.cpp Object/LoadObject/ObjFileParser.h Controls.cpp Controls.h) #common to all clion project
-target_link_libraries(Simulation ${OpenGlLinkers}) # linking opengl libraries to the project
+include_directories(Simulation_src)
+add_subdirectory(Simulation_src)
+add_subdirectory(Simulation_test)
 
 #################################################

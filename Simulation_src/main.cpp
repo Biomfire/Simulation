@@ -7,7 +7,6 @@
 #include <vector>
 #include "shader.hpp"
 #include "Object/Object.h"
-#include "Object/LoadObject/ObjFileParser.h"
 #include "Controls.h"
 
 GLFWwindow *window;
@@ -42,8 +41,8 @@ int main() {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glEnable(GL_CULL_FACE);
-    GLuint programID = LoadShaders("/home/biomfire/Programing/Simulation/SimpleVertexShader.vertexshader",
-                                   "/home/biomfire/Programing/Simulation/SimpleFragmentShader.fragmentshader");
+    GLuint programID = LoadShaders("/home/biomfire/Programing/Simulation/Simulation_src/SimpleVertexShader.vertexshader",
+                                   "/home/biomfire/Programing/Simulation/Simulation_src/SimpleFragmentShader.fragmentshader");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // NOLINT(hicpp-signed-bitwise)
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
     Object obj("/home/biomfire/Programing/Simulation/object.obj");

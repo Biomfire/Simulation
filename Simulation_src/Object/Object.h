@@ -11,7 +11,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <fstream>
-#include "LoadObject/ObjFileParser.h"
+#include "../LoadResources/LoadObject/ObjFileParser.h"
 
 class Object {
     GLuint vao;
@@ -24,6 +24,11 @@ public:
 
     void draw();
 
+    void loadNormalsIntoBuffer(const GLuint *vbo) const;
+
+    void loadUvIntoBuffer(const GLuint *vbo) const;
+
+    void loadCoordsIntoBuffer(const GLuint *vbo) const;
 };
 
 
